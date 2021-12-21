@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>look</title>
+    <style>
+        .box {
+            width: 300px;
+            height: 300px;
+            background-color: rgb(188, 227, 236);
+        }
+    </style>
+</head>
+<body>
+<!-- 2.准备具有大小的DOM容器 -->
+<div class="box"></div>
+<br>
+<p id='p'></p>
+<p id='pp'></p>
+<p id='a'></p>
+<p id='b'></p>
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="../static/js/echarts.min.js"></script>
+<script>
+
+    test = []
+    var myChart = echarts.init(document.querySelector(".box"));
+    var p = document.getElementById('p')
+    var pp = document.getElementById('pp')
+    var aa = document.getElementById('a')
+    var bb = document.getElementById('b')
+
+
+    function look(a,b) {
+        var myChart = echarts.init(document.querySelector(".box"));
+        option = {
+            title: {
+                text: 'Speed'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {},
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                boundaryGap: [0, 0.01]
+            },
+            yAxis: {
+                type: 'category',
+                data: a
+            },
+            series: [
+
+                {
+                    name: '字数',
+                    type: 'bar',
+                    data: b
+                }
+            ]
+        };
+        myChart.setOption(option);
+    }
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "/look",
+            success: function (message) {
+                test = message
+                data = message.username
+                data_02 = message.score
+                te = []
+                for (var i in data) {
+                    te.push(data[i])
+                }
+                console.log(message)
+                console.log('aaa')
+                de = []
+                for (var i in data_02) {
+                    de.push(data_02[i])
+                }
+
+                look(te,de)
+
+            },
+            error: function () {
+                console.log('sb');
+            }
+        });
+    });
+
+
+
+
+
+
+</script>
+</body>
+</html>

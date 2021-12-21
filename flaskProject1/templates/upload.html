@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+题目：<input type="text" id = 'name'><br>
+
+内容：<textarea type="text"  id = 'textarea'></textarea><br>
+
+<button type="button" id = 'button'>submit</button>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+
+<script>
+
+	$("#button").click(function() {
+        $.ajax({
+            url: "/upload",
+            type: "POST",
+            dataType: 'json',
+            data: {
+                name: $("#name").val(),
+                content: $("#textarea").val()
+            },
+            success: function (result) {
+                alert('cg')
+                console.log(result)},
+            error: function(){
+                alert('sb')
+                console.log('shibai')
+
+            },
+        });
+    })
+
+
+
+</script>
+
+</body>
+</html>
